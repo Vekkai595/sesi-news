@@ -34,12 +34,19 @@ export default function ArticleForm({ article, onSave, onCancel }) {
     setUploading(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSaving(true);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSaving(true);
+
+  try {
     await onSave(form);
+  } catch (error) {
+    console.error("Erro ao publicar notícia:", error);
+    alert("Erro ao publicar notícia. Veja o Console/F12 para detalhes.");
+  } finally {
     setSaving(false);
-  };
+  }
+};
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
