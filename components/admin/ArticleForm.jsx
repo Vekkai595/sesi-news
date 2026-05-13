@@ -49,7 +49,7 @@ export default function ArticleForm({ article, onSave, onCancel }) {
     await onSave(form);
   } catch (error) {
     console.error("Erro ao publicar notícia:", error);
-    alert("Erro ao publicar notícia. Veja o Console/F12 para detalhes.");
+    alert("Erro ao publicar notícia: " + (error.message || JSON.stringify(error)));
   } finally {
     setSaving(false);
   }
