@@ -26,14 +26,21 @@ export default function ArticleForm({ article, onSave, onCancel }) {
   };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  try {
     setUploading(true);
     const fileUrl = await uploadImageLocally(file);
     handleChange("image_url", fileUrl);
+    alert("Imagem enviada!");
+  } catch (error) {
+    console.error("Erro no upload da imagem:", error);
+    alert("Erro ao enviar imagem");
+  } finally {
     setUploading(false);
-  };
-
+  }
+};
  const handleSubmit = async (e) => {
   e.preventDefault();
   setSaving(true);
